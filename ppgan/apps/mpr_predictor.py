@@ -31,21 +31,21 @@ from tqdm import tqdm
 model_cfgs = {
     'Deblurring': {
         'model_urls':
-        'https://paddlegan.bj.bcebos.com/models/MPR_Deblurring.pdparams',
+            'https://paddlegan.bj.bcebos.com/models/MPR_Deblurring.pdparams',
         'n_feat': 96,
         'scale_unetfeats': 48,
         'scale_orsnetfeats': 32,
     },
     'Denoising': {
         'model_urls':
-        'https://paddlegan.bj.bcebos.com/models/MPR_Denoising.pdparams',
+            'https://paddlegan.bj.bcebos.com/models/MPR_Denoising.pdparams',
         'n_feat': 80,
         'scale_unetfeats': 48,
         'scale_orsnetfeats': 32,
     },
     'Deraining': {
         'model_urls':
-        'https://paddlegan.bj.bcebos.com/models/MPR_Deraining.pdparams',
+            'https://paddlegan.bj.bcebos.com/models/MPR_Deraining.pdparams',
         'n_feat': 40,
         'scale_unetfeats': 20,
         'scale_orsnetfeats': 16,
@@ -58,10 +58,11 @@ class MPRPredictor(BasePredictor):
                  output_path='output_dir',
                  weight_path=None,
                  seed=None,
-                 task=None):
+                 task=None,
+                 max_size=640):
         self.output_path = output_path
         self.task = task
-        self.max_size = 640
+        self.max_size = max_size
         self.img_multiple_of = 8
 
         if weight_path is None:
@@ -128,8 +129,8 @@ class MPRPredictor(BasePredictor):
 
             H, W = ((h + self.img_multiple_of) //
                     self.img_multiple_of) * self.img_multiple_of, (
-                        (w + self.img_multiple_of) //
-                        self.img_multiple_of) * self.img_multiple_of
+                           (w + self.img_multiple_of) //
+                           self.img_multiple_of) * self.img_multiple_of
             padh = H - h if h % self.img_multiple_of != 0 else 0
             padw = W - w if w % self.img_multiple_of != 0 else 0
             input_ = paddle.to_tensor(input_)

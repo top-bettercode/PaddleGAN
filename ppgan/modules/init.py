@@ -48,8 +48,8 @@ def calculate_gain(nonlinearity, param=None):
     Conv{1,2,3}D      :math:`1`
     Sigmoid           :math:`1`
     Tanh              :math:`\frac{5}{3}`
-    ReLU              :math:`\sqrt{2}`
-    Leaky Relu        :math:`\sqrt{\frac{2}{1 + \text{negative\_slope}^2}}`
+    ReLU              :math:`\\sqrt{2}`
+    Leaky Relu        :math:`\\sqrt{\frac{2}{1 + \text{negative\\_slope}^2}}`
     ================= ====================================================
 
     Args:
@@ -76,7 +76,7 @@ def calculate_gain(nonlinearity, param=None):
         else:
             raise ValueError(
                 "negative_slope {} not a valid number".format(param))
-        return math.sqrt(2.0 / (1 + negative_slope**2))
+        return math.sqrt(2.0 / (1 + negative_slope ** 2))
     else:
         raise ValueError("Unsupported nonlinearity {}".format(nonlinearity))
 
@@ -108,10 +108,10 @@ def xavier_uniform_(x, gain=1.):
     described in `Understanding the difficulty of training deep feedforward
     neural networks` - Glorot, X. & Bengio, Y. (2010), using a uniform
     distribution. The resulting tensor will have values sampled from
-    :math:`\mathcal{U}(-a, a)` where
+    :math:`\\mathcal{U}(-a, a)` where
 
     .. math::
-        a = \text{gain} \times \sqrt{\frac{6}{\text{fan\_in} + \text{fan\_out}}}
+        a = \text{gain} \times \\sqrt{\frac{6}{\text{fan\\_in} + \text{fan\\_out}}}
 
     Also known as Glorot initialization.
 
@@ -133,10 +133,10 @@ def xavier_normal_(x, gain=1.):
     described in `Understanding the difficulty of training deep feedforward
     neural networks` - Glorot, X. & Bengio, Y. (2010), using a normal
     distribution. The resulting tensor will have values sampled from
-    :math:`\mathcal{N}(0, \text{std}^2)` where
+    :math:`\\mathcal{N}(0, \text{std}^2)` where
 
     .. math::
-        \text{std} = \text{gain} \times \sqrt{\frac{2}{\text{fan\_in} + \text{fan\_out}}}
+        \text{std} = \text{gain} \times \\sqrt{\frac{2}{\text{fan\\_in} + \text{fan\\_out}}}
 
     Also known as Glorot initialization.
 
@@ -157,10 +157,10 @@ def kaiming_uniform_(x, a=0, mode='fan_in', nonlinearity='leaky_relu'):
     described in `Delving deep into rectifiers: Surpassing human-level
     performance on ImageNet classification` - He, K. et al. (2015), using a
     uniform distribution. The resulting tensor will have values sampled from
-    :math:`\mathcal{U}(-\text{bound}, \text{bound})` where
+    :math:`\\mathcal{U}(-\text{bound}, \text{bound})` where
 
     .. math::
-        \text{bound} = \text{gain} \times \sqrt{\frac{3}{\text{fan\_mode}}}
+        \text{bound} = \text{gain} \times \\sqrt{\frac{3}{\text{fan\\_mode}}}
 
     Also known as He initialization.
 
@@ -194,10 +194,10 @@ def kaiming_normal_(x, a=0, mode='fan_in', nonlinearity='leaky_relu'):
     described in `Delving deep into rectifiers: Surpassing human-level
     performance on ImageNet classification` - He, K. et al. (2015), using a
     normal distribution. The resulting tensor will have values sampled from
-    :math:`\mathcal{N}(0, \text{std}^2)` where
+    :math:`\\mathcal{N}(0, \text{std}^2)` where
 
     .. math::
-        \text{std} = \frac{\text{gain}}{\sqrt{\text{fan\_mode}}}
+        \text{std} = \frac{\text{gain}}{\\sqrt{\text{fan\\_mode}}}
 
     Also known as He initialization.
 
@@ -281,6 +281,7 @@ def init_weights(net,
     We use 'normal' in the original pix2pix and CycleGAN paper. But xavier and kaiming might
     work better for some applications. Feel free to try yourself.
     """
+
     def init_func(m):  # define the initialization function
         classname = m.__class__.__name__
         if hasattr(m, 'weight') and (classname.find('Conv') != -1

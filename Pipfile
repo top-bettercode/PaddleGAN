@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+ppgan = {editable = true, path = ".", index = "pypi"}
+paddlepaddle = "==2.4.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
